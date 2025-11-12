@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portafolio - Sebastian Causado Quintero</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-blue-600 to-purple-700 text-white text-center py-20 shadow-lg rounded-b-[60px]">
+    <h1 class="text-4xl font-bold mb-3">Sebastian Causado Quintero</h1>
+    <p class="text-lg">Técnico en Sistemas | Estudiante de Tecnología en Sistemas (5° Semestre)</p>
+  </section>
+
+  <!-- Sobre mí -->
+  <section class="max-w-6xl mx-auto px-6 py-16 reveal">
+    <h2 class="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Sobre mí</h2>
+    <div class="flex flex-col md:flex-row items-center gap-10">
+      <div class="md:w-1/2 text-lg leading-relaxed">
+        <p>
+          Tengo 22 años y soy Técnico en Sistemas. Actualmente curso el quinto semestre de la Tecnología en Sistemas. 
+          Realicé mis prácticas empresariales en una empresa desarrolladora de software, donde reforcé mis conocimientos 
+          en programación y trabajo en equipo.
+        </p>
+      </div>
+      <div class="md:w-1/2 text-center">
+        <img src="https://media.licdn.com/dms/image/v2/D4D03AQEJkZ062vtDPA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1719807920478?e=1764201600&v=beta&t=2W6cqHLbxrpkG7GXYlzg8y1w4kO1P2NMMVZVoPxW4wQ" 
+             alt="Foto de perfil" 
+             class="rounded-full shadow-lg mx-auto w-48 h-48 object-cover border-4 border-white dark:border-gray-800">
+      </div>
+    </div>
+  </section>
+
+  <!-- Habilidades -->
+  <section class="max-w-6xl mx-auto px-6 py-16 reveal">
+    <h2 class="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Habilidades</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1">
+        <h5 class="text-xl font-semibold mb-3 text-blue-600 dark:text-blue-400 text-center">Programación</h5>
+        <p class="text-center">Experiencia básica con lenguajes como JavaScript, HTML, CSS y Python.</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1">
+        <h5 class="text-xl font-semibold mb-3 text-blue-600 dark:text-blue-400 text-center">Bases de Datos</h5>
+        <p class="text-center">Conocimientos en MySQL y bases de datos relacionales.</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1">
+        <h5 class="text-xl font-semibold mb-3 text-blue-600 dark:text-blue-400 text-center">Trabajo en Equipo</h5>
+        <p class="text-center">Desarrollo de proyectos colaborativos en entornos de software.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proyectos -->
+  <section class="max-w-6xl mx-auto px-6 py-16 reveal">
+    <h2 class="text-3xl font-bold text-center mb-10 text-gray-800 dark:text-gray-100">Proyectos</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1">
+        <h5 class="text-xl font-semibold mb-3 text-blue-600 dark:text-blue-400">Sistema de Gestión</h5>
+        <p>Desarrollo de un sistema para administrar usuarios y recursos en una empresa.</p>
+      </div>
+      <div class="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1">
+        <h5 class="text-xl font-semibold mb-3 text-blue-600 dark:text-blue-400">Portafolio Web</h5>
+        <p>Creación de un sitio personal utilizando HTML, CSS, Tailwind y JavaScript.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section class="max-w-4xl mx-auto text-center px-6 py-16 reveal">
+    <h2 class="text-3xl font-bold mb-10 text-gray-800 dark:text-gray-100">Contacto</h2>
+    <p class="text-lg mb-2">📧 <strong>scausado_usistemas@intep.edu.co</strong></p>
+    <p class="text-lg mb-2">📞 <strong>310 895 0408</strong></p>
+    <p class="text-lg">💼 
+      <strong>LinkedIn:</strong> 
+      <a href="https://www.linkedin.com/in/sebastian-causado-quintero-91927b317/" 
+         target="_blank" 
+         class="text-blue-600 dark:text-blue-400 hover:text-purple-600 dark:hover:text-purple-400 transition">
+        https://www.linkedin.com/in/sebastian-causado-quintero-91927b317/
+      </a>
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white text-center py-5">
+    <p>© 2025 Sebastian Causado Quintero | Portafolio Profesional</p>
+  </footer>
+
+  <!-- Scroll Reveal Config -->
+  <script>
+    ScrollReveal().reveal('.reveal', {
+      distance: '60px',
+      duration: 1000,
+      easing: 'ease-out',
+      origin: 'bottom',
+      interval: 150
+    });
+  </script>
+</body>
+</html>
