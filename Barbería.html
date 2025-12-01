@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Barbería Premium</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: #151515;
+      color: white;
+      font-family: 'Segoe UI';
+    }
+
+    .hero {
+      height: 420px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero img {
+      filter: brightness(60%);
+      object-fit: cover;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      transition: .3s;
+    }
+
+    .barbero-img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .barbero-img:hover {
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
+
+    .registro-card {
+      background: #111;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      color: white;
+      margin-top: 20px;
+    }
+
+    .hora-boton {
+      padding: 10px 15px;
+      border: 1px solid #666;
+      background: #222;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .hora-boton:hover { background: #333; }
+    .hora-boton.disabled {
+      background: #444;
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .hora-boton.active {
+      background: #0d6efd;
+      border-color: #0d6efd;
+    }
+
+    .cita-card {
+      background: #111;
+      padding: 20px;
+      border-radius: 15px;
+      color: white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      border: 1px solid #333;
+      transition: 0.2s;
+    }
+    .cita-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    .cita-label {
+      font-weight: bold;
+      color: #bbbbbb;
+    }
+    .divider {
+      height: 1px;
+      width: 100%;
+      background: #333;
+      margin: 10px 0;
+    }
+
+    .popup-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .popup-box {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      width: 300px;
+      text-align: center;
+      color: #222;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="popupConfirmacion" class="popup-overlay">
+  <div class="popup-box">
+    <h4>Cita confirmada</h4>
+    <button onclick="cerrarPopup()" class="btn btn-primary mt-3">Aceptar</button>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">Barbería Premium</a>
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#barberos">Barberos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#registro">Registrar Cita</a></li>
+        <!--<li class="nav-item"><a class="nav-link" href="#tabla">Citas</a></li>-->
+        <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f" class="position-absolute w-100 h-100" />
+  <div class="position-absolute w-100 h-100" style="background: rgba(0,0,0,0.6);"></div>
+
+  <div class="position-relative text-center text-white p-5">
+    <h1 class="display-3 fw-bold">Barbería Premium</h1>
+    <p class="fs-4">Elegancia · Estilo · Profesionalismo</p>
+    <a href="#registro" class="btn btn-light btn-lg px-4 rounded-pill shadow">Registrar Cita</a>
+  </div>
+</header>
+
+<section id="barberos" class="container py-5 text-white">
+  <h2 class="text-center mb-4">Nuestros Barberos</h2>
+
+  <div class="row g-4">
+
+    <!-- Barbero Juan -->
+    <div class="col-md-4">
+      <div class="card border-0 shadow">
+        <img src="https://i.pinimg.com/originals/1d/c4/cb/1dc4cbdc7e39a3001820541c853da6b8.png"
+             class="barbero-img"
+             data-bs-toggle="modal"
+             data-bs-target="#modalJuan">
+
+        <div class="card-body text-center">
+          <h5>Juan</h5>
+          <p>Cortes clásicos y barba</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barbero Carlos -->
+    <div class="col-md-4">
+      <div class="card border-0 shadow">
+        <img src="https://grupoanjo.com/wp-content/uploads/2023/11/Betzabeth-19.png"
+             class="barbero-img"
+             data-bs-toggle="modal"
+             data-bs-target="#modalCarlos">
+
+        <div class="card-body text-center">
+          <h5>Carlos</h5>
+          <p>Fades y afeitado premium</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barbero Miguel -->
+    <div class="col-md-4">
+      <div class="card border-0 shadow">
+        <img src="https://i.pinimg.com/736x/a3/8e/ce/a38ecebe7af2d6ec0093c32497cb84fc.jpg"
+             class="barbero-img"
+             data-bs-toggle="modal"
+             data-bs-target="#modalMiguel">
+
+        <div class="card-body text-center">
+          <h5>Miguel</h5>
+          <p>Cortes modernos</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================= -->
+<!--        MODALES BARBEROS       -->
+<!-- ============================= -->
+
+<!-- Modal Juan -->
+<div class="modal fade" id="modalJuan" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Juan – Barbero Profesional</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+       <div class="modal-body">
+
+        <div class="text-center mb-3">
+          <img src="https://i.pinimg.com/originals/1d/c4/cb/1dc4cbdc7e39a3001820541c853da6b8.png"
+               class="img-fluid rounded shadow"
+               style="max-width:180px;">
+        </div>
+
+        <h5 class="fw-bold">⭐ Perfil Profesional</h5>
+        <p>Barbero certificado con más de 6 años de experiencia en barberías de alto nivel. Reconocido por su precisión y dedicación al estilo clásico masculino.</p>
+
+        <h5 class="fw-bold mt-3">🎓 Estudios & Diplomados</h5>
+        <ul>
+          <li>Diplomado en Barbería Clásica – Academia MasterCut</li>
+          <li>Certificación en Estilismo Masculino – International Barber School</li>
+          <li>Curso Profesional de Barbería Italiana</li>
+        </ul>
+
+        <h5 class="fw-bold mt-3">💈 Especialidades</h5>
+        <ul>
+          <li>Cortes clásicos (Pompadour, Taper Classic, Executive Cut)</li>
+          <li>Perfilado y diseño de barba</li>
+          <li>Afeitado a navaja con toallas calientes</li>
+          <li>Acabados con tijera premium</li>
+        </ul>
+
+        <h5 class="fw-bold mt-3">🛠 Servicios destacados</h5>
+        <ul>
+          <li>Full Barber Experience</li>
+          <li>Restauración y tratamiento de barba</li>
+          <li>Asesoría personalizada de imagen</li>
+        </ul>
+
+        <h5 class="fw-bold mt-3">💲 Tarifa</h5>
+        <p class="mb-0">Corte + Barba: <strong>$35.000 COP</strong></p>
+        <p>Afeitado premium: <strong>$25.000 COP</strong></p>
+
+        <h5 class="fw-bold mt-3">⭐ Calificación</h5>
+        <p>⭐⭐⭐⭐⭐ (4.9/5 por 380 clientes)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Carlos -->
+<div class="modal fade" id="modalCarlos" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Carlos – Barbero Experto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="text-center mb-3">
+          <img src="https://grupoanjo.com/wp-content/uploads/2023/11/Betzabeth-19.png"
+               class="img-fluid rounded shadow"
+               style="max-width:180px;">
+        </div>
+
+        <h5 class="fw-bold">⭐ Perfil Profesional</h5>
+        <p>Experto en fades modernos, técnicas urbanas y diseños de alto detalle. Su precisión en degradados lo convierte en uno de los más solicitados.</p>
+
+        <h5 class="fw-bold mt-3">🎓 Estudios & Diplomados</h5>
+        <ul>
+          <li>Certificación en Fade Avanzado – Urban Barber Academy</li>
+          <li>Curso de Diseño Capilar y Policromía</li>
+          <li>Diplomado en Afeitado Premium con vapor</li>
+        </ul>
+
+        <h5 class="fw-bold mt-3">💈 Especialidades</h5>
+        <ul>
+          <li>Skin fade / Mid fade / High fade</li>
+          <li>Afeitado premium con vapor</li>
+          <li>Diseños y figuras con máquina</li>
+          <li>Perfilado de cejas masculino</li>
+        </ul>
+
+        <h5 class="fw-bold mt-3">🛠 Servicios destacados</h5>
+        <ul>
+          <li>Fade + Barba Deluxe</li>
+          <li>Diseños personalizados</li>
+          <li>Limpieza de cutis express</li>
+        </ul>
+
+        <h5 class="fw-bold mt-3">💲 Tarifa</h5>
+        <p class="mb-0">Fade premium: <strong>$40.000 COP</strong></p>
+        <p>Afeitado Deluxe: <strong>$30.000 COP</strong></p>
+
+        <h5 class="fw-bold mt-3">⭐ Calificación</h5>
+        <p>⭐⭐⭐⭐⭐ (4.8/5 por 410 clientes)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Miguel -->
+<div class="modal fade" id="modalMiguel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title">Miguel – Estilista Masculino</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+       <div class="modal-body">
+
+        <div class="text-center mb-3">
+          <img src="https://i.pinimg.com/736x/a3/8e/ce/a38ecebe7af2d6ec0093c32497cb84fc.jpg"
+               class="img-fluid rounded shadow"
+               style="max-width:180px;">
+        </div>
+
+        <h5 class="fw-bold">⭐ Perfil Profesional</h5>
+        <p>Especialista en cortes modernos, tendencias juveniles y manejo de volumen. Su estilo fresco lo convierte en la mejor opción para looks actuales.</p>
+
+        <h5 class="fw-bold mt-3">🎓 Estudios & Diplomados</h5>
+        <ul>
+          <li>Diplomado en Estilismo Moderno – BarberLab</li>
+          <li>Técnicas avanzadas con tijera</li>
+          <li>Certificación en texturización y control de volumen</li>
+        </ul>
+
+        <h5 class="fw-bold mt-3">💈 Especialidades</h5>
+        <ul>
+          <li>Cortes modernos (Crop, Buzz, Flow, Quiff)</li>
+          <li>Texturización profesional</li>
+          <li>Fade suave con tijera</li>
+          <li>Armonización de rostro</li>
+        </ul>
+
+        <h5 class="fw-bold mt-3">🛠 Servicios destacados</h5>
+        <ul>
+          <li>Corte Moderno + Cepillado</li>
+          <li>Texturizado Pro</li>
+          <li>Lavado + Tratamiento capilar</li>
+        </ul>
+
+        <h5 class="fw-bold mt-3">💲 Tarifa</h5>
+        <p class="mb-0">Corte moderno: <strong>$35.000 COP</strong></p>
+        <p>Tratamiento capilar: <strong>$20.000 COP</strong></p>
+
+        <h5 class="fw-bold mt-3">⭐ Calificación</h5>
+        <p>⭐⭐⭐⭐⭐ (4.7/5 por 290 clientes)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODALES AQUÍ — LOS MANTENGO IGUALES -->
+
+<section id="registro" class="container py-5">
+  <h2 class="text-center mb-4">Registrar Cita</h2>
+
+  <div class="registro-card">
+
+    <form id="formCita" class="row g-3">
+
+      <div class="col-md-6">
+        <label class="form-label">Nombre del Cliente</label>
+        <input class="form-control" required type="text" id="nombre">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Número de Teléfono</label>
+        <input class="form-control" required type="tel" id="telefono" placeholder="3001234567" pattern="[0-9]{10}">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Seleccione Barbero</label>
+        <select class="form-select" id="barbero" required>
+          <option value="">Seleccione barbero</option>
+          <option>Juan</option>
+          <option>Carlos</option>
+          <option>Miguel</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Fecha</label>
+        <input class="form-control" required type="date" id="fecha">
+      </div>
+
+      <div class="col-md-12">
+        <label class="form-label">Seleccione una Hora</label>
+        <div id="listaHoras" class="d-flex flex-wrap gap-2"></div>
+      </div>
+
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-primary w-100 py-2">Registrar Cita</button>
+      </div>
+
+    </form>
+
+  </div>
+</section>
+
+<section id="tabla" class="container my-5">
+  <h2 class="text-center mb-4"></h2>
+  <div id="listaCitas" class="row g-4"></div>
+</section>
+
+<section id="contacto" class="py-5 text-white"
+style="background: linear-gradient(to right, #000000, #2c2c2c); border-radius: 15px; padding: 60px 20px;">
+
+  <h2 class="text-center mb-4" style="font-size: 2.3rem; font-weight: 600;">Contáctanos</h2>
+
+  <div class="container">
+    <div class="d-flex flex-column flex-md-row justify-content-around align-items-center text-center gap-4">
+
+      <div>
+        <h4>📞 Teléfono</h4>
+        <p style="font-size: 1.2rem;">+57 300 111 2233</p>
+      </div>
+
+      <div>
+        <h4>📧 Email</h4>
+        <p style="font-size: 1.2rem;">barberiaElñato@gmail.com</p>
+      </div>
+
+      <div>
+        <h4>📍 Dirección</h4>
+        <p style="font-size: 1.2rem;">Calle 14a #6a 03 - Roldanillo, Valle</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<a 
+  href="https://wa.me/573001112233?text=%F0%9F%94%A5%F0%9F%8E%88%20%C2%A1Hola%20Barber%C3%ADa%20Premium!%20Vi%20sus%20servicios%20y%20me%20encant%C3%B3%20el%20estilo.%20%F0%9F%92%AF%20%C2%BFMe%20pueden%20dar%20info%20sobre%20cortes%2C%20barbas%20y%20citas%20disponibles%3F%20%F0%9F%9A%80"
+  class="btn btn-success position-fixed"
+  style="bottom:20px; right:20px; border-radius:50px; padding:12px 18px;">
+  WhatsApp
+</a>
+
+<script>
+
+const horas = [
+  "08:00","08:30","09:00","09:30",
+  "10:00","10:30","11:00","11:30",
+  "14:00","14:30","15:00","15:30",
+  "16:00","16:30","17:00"
+];
+
+let citas = [];
+let horaSeleccionada = "";
+
+const barbero = document.getElementById("barbero");
+const fecha = document.getElementById("fecha");
+const listaHoras = document.getElementById("listaHoras");
+
+function renderHoras() {
+  listaHoras.innerHTML = "";
+  const selBarbero = barbero.value;
+  const selFecha = fecha.value;
+
+  horas.forEach(h => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = h;
+    btn.className = "hora-boton";
+
+    const ocupada = citas.some(c =>
+      c.barbero === selBarbero &&
+      c.fecha === selFecha &&
+      c.hora === h
+    );
+
+    if (ocupada) {
+      btn.classList.add("disabled");
+      btn.disabled = true;
+    } else {
+      btn.onclick = () => {
+        horaSeleccionada = h;
+        document.querySelectorAll(".hora-boton").forEach(el => el.classList.remove("active"));
+        btn.classList.add("active");
+      };
+    }
+
+    listaHoras.appendChild(btn);
+  });
+}
+
+barbero.addEventListener("change", renderHoras);
+fecha.addEventListener("change", renderHoras);
+
+document.getElementById("formCita").addEventListener("submit", e => {
+  e.preventDefault();
+
+  if (!horaSeleccionada) {
+    alert("Debe seleccionar una hora disponible.");
+    return;
+  }
+
+  const nueva = {
+    nombre: document.getElementById("nombre").value,
+    telefono: document.getElementById("telefono").value,
+    fecha: fecha.value,
+    hora: horaSeleccionada,
+    barbero: barbero.value,
+    confirmada: false
+  };
+
+  citas.push(nueva);
+  actualizarTabla();
+  renderHoras();
+  document.getElementById("formCita").reset();
+  horaSeleccionada = "";
+});
+
+function actualizarTabla() {
+  const cont = document.getElementById("listaCitas");
+  cont.innerHTML = "";
+
+  citas.forEach((c, i) => {
+    const card = document.createElement("div");
+    card.className = "col-md-4";
+
+    const botonConfirmar = c.confirmada
+      ? `<button class="btn btn-secondary w-100 mt-2" disabled>Cita Confirmada</button>`
+      : `<button class="btn btn-success w-100 mt-2" onclick="abrirPopup(${i})">Confirmar cita</button>`;
+
+    card.innerHTML = `
+      <div class="cita-card">
+        <p><span class="cita-label">Cliente:</span> ${c.nombre}</p>
+        <p><span class="cita-label">Teléfono:</span> ${c.telefono}</p>
+        <div class="divider"></div>
+        <p><span class="cita-label">Fecha:</span> ${c.fecha}</p>
+        <p><span class="cita-label">Hora:</span> ${c.hora}</p>
+        <p><span class="cita-label">Barbero:</span> ${c.barbero}</p>
+
+        ${botonConfirmar}
+
+        <button class="btn btn-danger w-100 mt-2" onclick="eliminarCita(${i})">
+          Eliminar
+        </button>
+      </div>
+    `;
+
+    cont.appendChild(card);
+  });
+}
+
+function abrirPopup(index) {
+  citas[index].confirmada = true;
+  actualizarTabla();
+  document.getElementById("popupConfirmacion").style.display = "flex";
+}
+
+function cerrarPopup() {
+  document.getElementById("popupConfirmacion").style.display = "none";
+}
+
+function eliminarCita(i) {
+  citas.splice(i, 1);
+  actualizarTabla();
+  renderHoras();
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
